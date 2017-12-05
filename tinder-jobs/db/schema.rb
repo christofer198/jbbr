@@ -30,7 +30,8 @@ ActiveRecord::Schema.define(version: 20171205193320) do
 
   create_table "resumes", force: :cascade do |t|
     t.string "title"
-    t.text "description"
+    t.integer "user_id"
+    t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

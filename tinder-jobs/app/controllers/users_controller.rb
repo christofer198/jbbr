@@ -16,6 +16,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+
+  def add_resume
+    @resume = Resume.new
+  end
+
   private
 
   def user_params
