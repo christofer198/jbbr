@@ -1,0 +1,10 @@
+<h1> New </h1>
+
+<%= form_for :resume do |f| %>
+
+  Title: <%= f.text_field :title %><p>
+  Paste Resume Here: <%= f.text_area :description %><p>
+  <input type="hidden" name="user_id" value="USERUSER">
+  <%= f.submit %>
+
+<% end %>

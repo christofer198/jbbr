@@ -1,3 +1,13 @@
-<%= @user.name %>
+<h1> Hi, <%= @user.name %> </h1>
 
-<p>add your resume</p>
+
+<% if @user.resume %>
+  <h2> Here's your resume </h2>
+  <p><h3><%= @user.resume.title %></h3>
+  <p><%= @user.resume.description %>
+  <p><a href="/users/<%= @user.id %>/resume/edit"> <%= button_tag "Edit your resume" %> </a></p>
+<% else %>
+  <p><a href='/users/<%= @user.id %>/resume/new'> <%= button_tag "Add your resume" %></a></p>
+<% end %>
+
+<%= link_to "See all openings", openings_path %>

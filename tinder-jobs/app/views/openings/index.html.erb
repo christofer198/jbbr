@@ -1,0 +1,18 @@
+<h1> All the Openings </h1>
+
+<h2> Filters </h2>
+Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name %>
+Employer: <%= collection_select :employer, :employer_id, Employer.all, :id, :name %>
+<%= button_tag 'Filter' %>
+
+<ol>
+<% @openings.each do |opening| %>
+
+  <li> <h4><%= opening.title %> </h4></li>
+  <%= opening.description %>
+  <%= button_tag 'Apply' %>
+  <p>
+
+<% end %>
+
+</ol>

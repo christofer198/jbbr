@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def index
-    
+    @users = User.all
   end
 
   def new
@@ -8,14 +8,22 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.create(user_params)
-    redirect_to user_path(@user)
+    @user = User.new(user_params)
+    if @user.valid?
+      @user.save
+      redirect_to user_path(@user)
+    else
+      render :new
+    end
+  end
+
+  def openings
+    @openings = Opening.all
   end
 
   def show
     @user = User.find(params[:id])
   end
-
 
   def add_resume
     @resume = Resume.new
