@@ -8,9 +8,8 @@ class EmployersController < ApplicationController
   end
 
   def show
-  end
-
-  def index
+    @employer = Employer.find(params[:id])
+    @openings = @employer.openings
   end
 
 end

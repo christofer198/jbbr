@@ -1,4 +1,5 @@
 class OpeningsController < ApplicationController
+<<<<<<< HEAD
 
   def new
     @opening = Opening.new
@@ -21,4 +22,12 @@ class OpeningsController < ApplicationController
     @openings = Opening.all
   end
 
+=======
+  def show
+    @opening = Opening.find(params[:id])
+  end
+
+  def new
+  end
+>>>>>>> refs/remotes/origin/master
 end
