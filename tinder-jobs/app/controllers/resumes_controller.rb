@@ -1,3 +1,0 @@
-class ResumesController < ApplicationController
-
-end
