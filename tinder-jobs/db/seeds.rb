@@ -26,7 +26,6 @@ chris.resume = Resume.create(title: "Chris's Resume", description: "I'm excellen
 5.times do |t|
   employer = Employer.create(name: Faker::Company.unique.name, sector: Sector.create(name: Faker::Job.unique.field))
   2.times do |t|
-    opening = Opening.create(title: Faker::Job.unique.title, description: Faker::Company.unique.bs, salary: rand * 100000)
-    Employer.all.sample.openings << opening
+    opening = Opening.create(title: Faker::Job.unique.title, description: Faker::Company.unique.bs, salary: rand * 100000, employer_id: employer.id)
   end
 end
