@@ -12,7 +12,4 @@ class EmployersController < ApplicationController
     @openings = @employer.openings
   end
 
-  def index
-  end
-
 end
