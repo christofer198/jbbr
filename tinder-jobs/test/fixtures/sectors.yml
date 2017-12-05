@@ -2,9 +2,6 @@
 
 one:
   name: MyString
-  email: MyString
 
 two:
   name: MyString
-  email: MyString
-  resume_id: 1
