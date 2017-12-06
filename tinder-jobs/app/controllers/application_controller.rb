@@ -4,15 +4,18 @@ class ApplicationController < ActionController::Base
   before_action :authorized
 
   def logged_in?
-    !!session[:user]
+    !!session[:user_id]
   end
 
   def authorized
     if logged_in?
-      redirect_to profile_path
     else
       redirect_to login_path
     end
+  end
+
+  def session_user
+    User.find(session[:user_id])
   end
 
 end

@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20171206181609) do
     t.string "title"
     t.string "description"
     t.integer "salary"
-    t.integer "employer_id"
+    t.integer "company_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "max_distance"

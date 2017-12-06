@@ -1,11 +1,15 @@
 <h1> All the Openings </h1>
 
 <h2> Filters </h2>
-Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name %>
-Employer: <%= collection_select :employer, :employer_id, Employer.all, :id, :name %>
-<%= button_tag 'Filter' %>
+<%= form_tag openings_path, method: :get do %>
+Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name, {:prompt => "All"} %>
+Company: <%= collection_select :company, :company_id, Company.all, :id, :name,  {:prompt => 'All'} %>
+<%= submit_tag('Filter') %>
+<% end %>
+
 
 <ol>
+
 <% @openings.each do |opening| %>
 
   <li> <h4><%= opening.title %> </h4></li>

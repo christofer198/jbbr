@@ -6,8 +6,6 @@ require 'open-uri'
 
 class ApplicationsController < ApplicationController
 
-  skip_before_action :authorized, only: [:show, :new, :create, :destroy]
-
   def show
     @applications = Application.where(["opening_id = ? and employer_likes IS NULL", params[:id]])
     opening = Opening.find(params[:id])

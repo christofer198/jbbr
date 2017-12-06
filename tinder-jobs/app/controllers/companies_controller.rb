@@ -1,7 +1,5 @@
 class CompaniesController < ApplicationController
 
-  skip_before_action :authorized
-
   def new
     @company = Company.new
   end

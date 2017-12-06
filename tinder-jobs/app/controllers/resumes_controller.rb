@@ -1,7 +1,5 @@
 class ResumesController < ApplicationController
 
-  skip_before_action :authorized, only: [:new, :show, :create, :destroy]
-
   def new
     @resume = Resume.new
     @applicant_id = session[:user_id]
@@ -18,12 +16,11 @@ class ResumesController < ApplicationController
   end
 
   def edit
-    @resume = Resume.find(params[:id])
+    @resume = session_user.resume
   end
 
   def update
-    @resume = Resume.find(params[:id])
-    user = @resume.user
+    @resume = session_user.resume
     @resume.update(resume_params)
     redirect_to profile_path
   end
