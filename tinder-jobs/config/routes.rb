@@ -16,9 +16,12 @@ Rails.application.routes.draw do
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'
 
-  get '/profile/resume/new', to: 'resumes#new'
-  get '/profile/resume/edit', to: 'resumes#edit'
+  get '/profile/resume/new', to: 'resumes#new', as: 'resume_new'
+  post "/profile/resume/new", to: 'resumes#create'
+
+  get '/profile/resume/edit', to: 'resumes#edit', as: 'resume_edit'
   post "/profile/resume/edit", to: 'resumes#update'
-  post "/users/:id/resume/new", to: 'resumes#create'
+
+  get '/profile/resume', to: 'resumes#show', as: 'resume_show'
 
 end

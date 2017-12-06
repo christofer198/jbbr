@@ -21,7 +21,7 @@
   <p><%= @user.resume.description %>
   <p><a href="/users/<%= @user.id %>/resume/edit"> <%= button_tag "Edit your resume" %> </a></p>
 <% else %>
-  <p><a href='/users/<%= @user.id %>/resume/new'> <%= button_tag "Add your resume" %></a></p>
+  <p><a href='<%= resume_new_path %>'> <%= button_tag "Add your resume" %></a></p>
 <% end %>
 
 <%= link_to "See all openings", openings_path %>

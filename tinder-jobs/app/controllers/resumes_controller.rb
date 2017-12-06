@@ -1,16 +1,17 @@
 class ResumesController < ApplicationController
 
+  skip_before_action :authorized, only: [:new, :show, :create, :destroy]
+
   def new
     @resume = Resume.new
-    # @user =
+    @applicant_id = session[:user_id]
   end
 
   def create
-    # byebug
-    @resume = Resume.new(title: params[:title], description: params[:description])
-    if @resume.valid?
-      @resume.save
-      redirect_to resume_path(@resume)
+    @resume = Resume.new(resume_params)
+    if @resume.save
+      flash[:message] = "Resume saved!"
+      redirect_to profile_path
     else
       render :new
     end
@@ -23,15 +24,20 @@ class ResumesController < ApplicationController
   def update
     @resume = Resume.find(params[:id])
     user = @resume.user
-    @resume.update(title: params[:title], description: params[:description])
-    redirect_to user_path(user)
+    @resume.update(resume_params)
+    redirect_to profile_path
   end
 
   def show
+    @resume = User.find(session[:user_id]).resume
   end
 
   def index
     @resumes = Resume.all
+  end
+
+  def resume_params
+    params.require(:resume).permit(:title, :description, :applicant_id)
   end
 
 end
