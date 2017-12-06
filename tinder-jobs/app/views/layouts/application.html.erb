@@ -15,6 +15,7 @@
     <% end %>
 
     <% if session[:user_id] %>
+      <p><a href="/profile"> <%= button_tag "Home" %> </a></p>
       <p><a href="/logout"> <%= button_tag "Logout" %> </a></p>
     <% end %>
     <%= yield %>

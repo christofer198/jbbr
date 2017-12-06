@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:new, :create, :edit, :update, :destroy]
 
-  resources :employers, :openings, :applications
+  resources :companies, :openings, :applications
 
   get '/profile', to: 'users#show'
 

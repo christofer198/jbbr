@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   def authorized
     if logged_in?
+      redirect_to profile_path
     else
       redirect_to login_path
     end

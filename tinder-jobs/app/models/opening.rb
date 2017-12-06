@@ -1,4 +1,4 @@
 class Opening < ApplicationRecord
-  belongs_to :employer
+  belongs_to :company
   has_many :applications
 end

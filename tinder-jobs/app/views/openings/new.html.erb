@@ -1,2 +1,9 @@
-<h1>Openings#new</h1>
-<p>Find me in app/views/openings/new.html.erb</p>
+<%= form_for(@opening) do |f| %>
+
+Job Title: <%= f.text_field :title %>
+Job Description: <%= f.text_area :description %>
+Job Salary: <%= f.text_field :salary %>
+<%= f.submit "Create Opening" %>
+
+
+<% end %>

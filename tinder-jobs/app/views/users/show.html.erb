@@ -2,11 +2,15 @@
 
 <h1> Hi, <%= @user.name %> </h1>
 
-<h2> Are you an employer? </h2>
-<h3> if so...fill out the below </h3>
+<% if @user.company_id == nil %>
+  <%= link_to "Become an Employer", new_company_path %>
+<% else %>
+  <%= link_to "Your Company's Page", company_path(@user.company_id) %>
+<% end %>
+
 
 <h1> LINK TO APPLICANT PAGE </h1>
-<h1> LINK TO EMPLOYEE PAGE </h1>
+
 
 
 
