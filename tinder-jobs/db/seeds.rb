@@ -12,7 +12,7 @@ User.destroy_all
 Resume.destroy_all
 
 Sector.destroy_all
-Employer.destroy_all
+Company.destroy_all
 Opening.destroy_all
 
 Application.destroy_all
@@ -24,8 +24,8 @@ jon.resume = Resume.create(title: "Jon's Resume", description: "I'm good at thin
 chris.resume = Resume.create(title: "Chris's Resume", description: "I'm excellent at things")
 
 5.times do |t|
-  employer = Employer.create(name: Faker::Company.unique.name, sector: Sector.create(name: Faker::Job.unique.field))
+  employer = Company.create(name: Faker::Company.unique.name, sector: Sector.create(name: Faker::Job.unique.field))
   2.times do |t|
-    opening = Opening.create(title: Faker::Job.unique.title, description: Faker::Company.unique.bs, salary: rand * 100000, employer_id: employer.id)
+    opening = Opening.create(title: Faker::Job.unique.title, description: Faker::Company.unique.bs, salary: rand * 100000, company_id: employer.id)
   end
 end

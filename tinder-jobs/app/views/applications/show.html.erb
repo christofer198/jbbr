@@ -2,11 +2,11 @@
 
 <% @applications.each do |application| %>
 
-<%= application.user.resume.description %>
-<%= form_tag(application_path(application), method: "put") do %>
-  <%= button_tag "Like", name: "like", value: "true" %>
-  <%= button_tag "Reject", name: "like", value: "false" %>
-<% end %>
+  <%= User.find(application.applicant_id).resume.description %>
+    <%= form_tag(application_path(application), method: "put") do %>
+      <%= button_tag "Like", name: "like", value: "true" %>
+      <%= button_tag "Reject", name: "like", value: "false" %>
+    <% end %>
  <!-- link to the application id, the controller will change the value to true or false -->
 <br>
 <% end %>

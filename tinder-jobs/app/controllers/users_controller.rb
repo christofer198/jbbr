@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  skip_before_action :authorized, only: [:new]
+  skip_before_action :authorized, only: [:new, :create]
 
   def index
     @users = User.all
@@ -11,6 +11,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    byebug
     @user = User.new(user_params)
     if @user.valid?
       @user.save

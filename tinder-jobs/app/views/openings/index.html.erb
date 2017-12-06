@@ -14,9 +14,10 @@ Company: <%= collection_select :company, :company_id, Company.all, :id, :name,  
 
   <li> <h4><%= opening.title %> </h4></li>
   <%= opening.description %>
-  <%= button_tag 'Apply' %>
-  <p>
-
+  <%= form_tag('/applications', method: :post) do %>
+    <%= hidden_field_tag 'opening_id', opening.id %>
+    <%= submit_tag 'Apply' %>
+  <% end %>
 <% end %>
 
 </ol>
