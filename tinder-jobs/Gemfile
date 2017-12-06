@@ -22,6 +22,8 @@ gem 'faker'
 
 gem 'rest-client'
 
+gem 'bcrypt'
+
 gem 'nokogiri'
 
 # Use CoffeeScript for .coffee assets and views

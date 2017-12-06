@@ -5,12 +5,20 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :users, :employers, :openings, :applications
+  resources :users, only: [:new, :edit, :update, :destroy]
 
-  get '/users/:id', to: 'users#show', as: '/dashboard'
-  get '/users/:id/resume/new', to: 'resumes#new'
-  get '/users/:id/resume/edit', to: 'resumes#edit'
-  post "/users/:id/resume/edit", to: 'resumes#update'
+  resources :employers, :openings, :applications
+
+  get '/profile', to: 'users#show'
+
+  get '/logout', to: 'sessions#destroy'
+
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+
+  get '/profile/resume/new', to: 'resumes#new'
+  get '/profile/resume/edit', to: 'resumes#edit'
+  post "/profile/resume/edit", to: 'resumes#update'
   post "/users/:id/resume/new", to: 'resumes#create'
 
 end
