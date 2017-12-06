@@ -4,3 +4,9 @@
 <%= @opening.description %>
 <br>
 <%= @opening.salary %>
+
+<%= link_to "Edit", edit_opening_path(@opening) %>
+
+<%= form_tag(opening_path(@opening), method: :delete) do%>
+  <%= submit_tag "Delete" %>
+<% end %>

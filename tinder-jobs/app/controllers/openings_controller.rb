@@ -7,16 +7,45 @@ class OpeningsController < ApplicationController
   end
 
   def create
-    @opening = Opening.new
-    if @opening.valid?
-      @opening.save
-      redirect_to opening_path(@opening)
+    #byebug
+    @opening = Opening.create(opening_params)
+    user = User.find(session[:user_id]).company_id
+    @opening.update(company_id: user)
+    redirect_to company_path(user)
+    #else
+      #render :new
+    #end
+  end
+
+  def edit
+    @user = User.find(session[:user_id])
+    @opening = Opening.find(params[:id])
+    if @user.company_id == @opening.company_id
+      @opening = Opening.find(params[:id])
     else
-      render :new
+      profile_path
     end
   end
 
+  def update
+    @opening = Opening.update(params[:id], opening_params)
+    redirect_to opening_path(@opening)
+  end
+
+  def destroy
+    Opening.destroy(params[:id])
+    user = User.find(session[:user_id]).company_id
+    redirect_to company_path(user)
+  end
+
   def show
+    @user = User.find(session[:user_id])
+    @opening = Opening.find(params[:id])
+    if @user.company_id == @opening.company_id
+     @opening = Opening.find(params[:id])
+   else
+     redirect_to profile_path
+   end
   end
 
   def index

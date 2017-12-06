@@ -16,8 +16,13 @@ class CompaniesController < ApplicationController
   end
 
   def show
-    @company = Company.find(params[:id])
-    @openings = @company.openings
+    @user = User.find(session[:user_id])
+    if @user.company_id == params[:id].to_i
+      @company = Company.find(params[:id])
+      @openings = @company.openings
+    else
+      redirect_to profile_path
+    end
     #@users = @openings.map{|x| x.applications.where(company_likes: true).ids}.flatten.map{|x| Application.find(x).user}
     #byebug
   end
