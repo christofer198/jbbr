@@ -1,4 +1,4 @@
-<h1> this is the profile page! </h1>
+<h1> Profile </h1>
 
 <h1> Hi, <%= @user.name %> </h1>
 
@@ -8,12 +8,17 @@
   <%= link_to "Your Company's Page", company_path(@user.company_id) %>
 <% end %>
 
+<h2> Preferences </h2>
 
-<h1> LINK TO APPLICANT PAGE </h1>
+<%= form_for :user do |f| %>
 
+  <p>Name: <%= f.text_field :name %> </p>
+  <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
+  <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
+  <p>Zip: <%= f.text_field :zip_code %></p>
+  <%= f.submit 'Save Preferences' %>
 
-
-
+<% end %>
 
 <% if @user.resume %>
   <h2> Here's your resume </h2>

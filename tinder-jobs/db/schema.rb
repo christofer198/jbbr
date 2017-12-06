@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206181609) do
+ActiveRecord::Schema.define(version: 20171206215454) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "applicant_id"
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 20171206181609) do
     t.integer "zip_code"
     t.string "password_digest"
     t.integer "company_id"
+    t.integer "pref_sector_id"
+    t.integer "pref_distance"
   end
 
 end

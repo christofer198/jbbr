@@ -8,7 +8,6 @@ class CompaniesController < ApplicationController
     @company = Company.new(company_params)
     if @company.valid?
       @company.save
-      @user = User.find(session[:user_id])
       @user.update(company_id: @company.id)
       redirect_to profile_path(@user)
     else

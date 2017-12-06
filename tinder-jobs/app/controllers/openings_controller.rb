@@ -1,5 +1,7 @@
 class OpeningsController < ApplicationController
 
+
+
   def new
     @opening = Opening.new
   end
@@ -18,31 +20,16 @@ class OpeningsController < ApplicationController
   end
 
   def index
-
-    # @sector = "sector_id = #{params[:sector][:sector_id]}" ||= ""
-    # @company = "company_id = #{params[:company][:company_id]}" ||= ""
-
-    # byebug
     if !params[:sector].nil? && !params[:sector][:sector_id].empty?
-      @sector = "sector_id = #{params[:sector][:sector_id]}"
-    else
-      @sector = ""
-    end
-
-    if !params[:company].nil? && !params[:company][:company_id].empty?
-      @company = "company_id = #{params[:company][:company_id]}"
-    else
-      @company = ""
-    end
-
-    Sector.where(@sector)
-    Company.where(@company)
-
-      openings.where(company_id: params[:company][:company_id])
-
+      @openings = Sector.find(params[:sector][:sector_id]).openings
     else
       @openings = Opening.all
     end
   end
+
+  def opening_params
+    params.require(:opening).permit(:title, :description, :salary, :zip_code, :company_id)
+  end
+
 
 end
