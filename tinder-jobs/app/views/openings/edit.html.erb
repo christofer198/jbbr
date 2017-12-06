@@ -1,0 +1,10 @@
+<%= form_for(@opening) do |f| %>
+
+Title: <%= f.text_field :name, value: @opening.title %>
+Description: <%= f.text_area :description, value: @opening.description %>
+Salary: <%= f.text_field :salary, value: @opening.salary %>
+
+<%= f.submit "Edit" %>
+
+
+<% end %>
