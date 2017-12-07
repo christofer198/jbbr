@@ -3,10 +3,6 @@ class UsersController < ApplicationController
   skip_before_action :authorized, only: [:new, :create]
   skip_before_action :session_user, only: [:new, :create]
 
-  def index
-    @users = User.all
-  end
-
   def new
     @user = User.new
   end
