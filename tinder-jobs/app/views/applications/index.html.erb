@@ -1,8 +1,9 @@
-<h1>Applications</h1>
+<h1>Matches with Applicants</h1>
 
 <% if @application.nil? == false %>
   <%= @applicant.nil? ? "No Resume Available" : @applicant.description %>
-    <%= form_tag(application_path(@application), method: "put") do %>
+    <%= @opening.title %>
+    <%= form_tag(applications_path, method: "put") do %>
       <%= button_tag "Like", name: "like", value: "true" %>
       <%= button_tag "Reject", name: "like", value: "false" %>
     <% end %>

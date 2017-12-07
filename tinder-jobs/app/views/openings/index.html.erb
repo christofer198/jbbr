@@ -2,14 +2,6 @@
 
 <% if !@user.resume.nil? %>
 
-<h2> Filters </h2>
-
-<%= form_tag openings_path, method: :get do %>
-  Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name, {:prompt => "All"} %>
-  Distance: <%= text_field_tag :distance %> from <%= @user.zip_code %>
-  <%= submit_tag('Filter') %>
-<% end %>
-
 <% opening = @openings.sample %>
 
 <% if !opening.nil? %>

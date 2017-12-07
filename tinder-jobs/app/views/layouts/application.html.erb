@@ -21,14 +21,21 @@
     <h1>Session type: <%= session[:type] == 1 ? 'Applicant' : 'Company' %></h1>
 
     <% if session[:type] == -1 %>
-      <p>View / Create Openings: <%= Company.find(@user.company_id).openings.count %> </p>
-      <%= link_to 'Match with Applicants', '/' %>
-      <%= link_to 'COMPANY MATCHES (X)', matches_path  %>
 
-      <% if @user.company_id == nil %>
-        <%= link_to "Become an Employer", new_company_path %>
-      <% else %>
         <%= link_to "Your #{Company.find(@user.company_id).name} Employee Page", company_path(@user.company_id) %>
+
+      <% if Company.find(@user.company_id).openings.any? %>
+        <p> <a href='/companies/<%=@user.company_id%>'>Openings: <%= Company.find(@user.company_id).openings.count %> </a>
+        <p> <a href='/openings/new'> Add more openings</a><br>
+        <p> <a href='/matches'> Matches: <%= @user.company_matches.count %> </a></p>
+        <%= link_to 'Match with Applicants', applications_path %>
+      <% else %>
+        <% if Company.find(@user.company_id).openings.count > 0 %>
+          <p> Openings: <%= Company.find(@user.company_id).openings.count %> </p>
+        <% else %>
+          <%= link_to "Create An Opening", new_opening_path %>
+        <% end %>
+
       <% end %>
 
       <%= form_tag request.original_url, method: :get do %>
@@ -36,13 +43,21 @@
         <%= submit_tag 'Switch to Employee View' %>
       <% end %>
 
+
     <% else %>
       <p>Applications Swiped: <%= @user.applications.count %> </p>
-      <p> USER MATCHES (X) </p>
+      <%= link_to 'Match with Companies', openings_path %>
+      <p> <a href='/matches'> Matches: <%= @user.user_matches.count %> </a></p>
+
+      <% if @user.company_id == nil %>
+        <%= link_to "Become an Employer", new_company_path %>
+      <% else %>
 
       <%= form_tag request.original_url, method: :get do %>
         <%= hidden_field_tag 'session_flipper', -1 %>
         <%= submit_tag 'Switch to Company View' %>
+      <% end %>
+
       <% end %>
 
     <% end %>

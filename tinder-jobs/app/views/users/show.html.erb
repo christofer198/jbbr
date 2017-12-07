@@ -1,26 +1,41 @@
-<h1> Profile </h1>
+<% if session[:type] == 1 %>
+  <h1> Applicant Profile </h1>
 
-<h1> Hi, <%= @user.name %> </h1>
+  <h2> Applicant Preferences </h2>
 
-<h2> Preferences </h2>
+  <%= form_for :user do |f| %>
 
-<%= form_for :user do |f| %>
+    <p>Name: <%= f.text_field :name %> </p>
+    <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
+    <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
+    <p>Zip: <%= f.text_field :zip_code %></p>
+    <%= f.submit 'Save Preferences' %>
 
-  <p>Name: <%= f.text_field :name %> </p>
-  <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
-  <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
-  <p>Zip: <%= f.text_field :zip_code %></p>
-  <%= f.submit 'Save Preferences' %>
+  <% end %>
 
-<% end %>
+  <% if @user.resume %>
+    <h2> Here's your resume </h2>
+    <p><h3><%= @user.resume.title %></h3>
+    <p><%= @user.resume.description %>
+    <p><a href='<%= resume_edit_path %>'> <%= button_tag "Edit your resume" %> </a></p>
+  <% else %>
+    <p><a href='<%= resume_new_path %>'> <%= button_tag "Add your resume" %></a></p>
+  <% end %>
 
-<% if @user.resume %>
-  <h2> Here's your resume </h2>
-  <p><h3><%= @user.resume.title %></h3>
-  <p><%= @user.resume.description %>
-  <p><a href='<%= resume_edit_path %>'> <%= button_tag "Edit your resume" %> </a></p>
 <% else %>
-  <p><a href='<%= resume_new_path %>'> <%= button_tag "Add your resume" %></a></p>
-<% end %>
 
-<%= link_to "See all openings", openings_path %>
+  <% if Company.find(@user.company_id) %>
+    <% @company = Company.find(@user.company_id) %>
+      <% if @company.openings.any? %>
+        <h1> <%= @company.name %> Openings </h1>
+        <br>
+        <% @company.openings.each do |opening| %>
+          <br>
+          <%= link_to opening.title, opening_path(opening)  %>
+          <br>
+        <% end %>
+        <br>
+      <% end %>
+  <% end %>
+
+<% end %>

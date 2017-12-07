@@ -13,7 +13,7 @@ class ApplicationsController < ApplicationController
     applications = opening.applications.where(opening_id: opening.id, user_like: true, employer_likes: nil)
     @application = applications.sample
     if @application.nil? == false
-      @applicant = User.find(application.applicant_id).resume
+      @applicant = User.find(@application.applicant_id).resume
     end
     # if @user.company_id == @opening.company_id
     #   @applications = Application.where(["opening_id = ? and employer_likes IS NULL and user_like = ?", params[:id], true])
@@ -35,6 +35,7 @@ class ApplicationsController < ApplicationController
 
   def update
     @application = Application.find(params[:id])
+    @opening = @application.opening
     @application.update(employer_likes: params[:like])
     redirect_to application_path(@application.opening_id)
   end

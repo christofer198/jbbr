@@ -1,15 +1,16 @@
-<h3>Join Existing Company</h3>
-
-<%= form_for @company do |f| %>
-
-<%= f.label :name %>
-<%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
 
 <h3>Add A New Company </h3>
+<%= form_for @company do |f| %>
 
 <%= f.label :name %>
 <%= f.text_field :name %>
 <%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"} %>
+
+<h3>Join Existing Company</h3>
+
+<%= f.label :name %>
+<%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
+
 <p><%= f.submit 'Join Company' %>
 
 <% end %>
