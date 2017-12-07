@@ -52,8 +52,8 @@ class OpeningsController < ApplicationController
     @openings = openings.reject{|x| Application.where(opening_id: x, applicant_id: user.id).blank? == false}
     params[:distance] = nil if params[:distance] == ""
 
-    if user.pref_distance.nil? == false #|| params[:distance].empty? == false
-      max_dist = params[:distance].empty? ? user.pref_distance : params[:distance].to_i
+    if user.pref_distance.nil? == false || params[:distance].empty? == false
+      max_dist = params[:distance].nil? ? user.pref_distance : params[:distance].to_i
       user_zip = user.zip_code
       source = RestClient.get("http://api.zip-codes.com/ZipCodesAPI.svc/1.0/FindZipCodesInRadius?zipcode=#{user_zip}&minimumradius=0&maximumradius=#{max_dist}&key=U9SA94E98NNA62YT854K")
       zip_hash = {}
