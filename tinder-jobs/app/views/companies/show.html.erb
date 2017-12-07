@@ -17,6 +17,6 @@
 <h1>Your Matches</h1>
 
 <% @users.each do |user| %>
- <p>You selected <%= user.name %> as a potential candidate for your opening "<%= user.openings.find_by(employer_id: @employer.id).title %>"</p>
+ <p>You selected <%= user.name %> as a potential candidate for your opening </p>
  <br>
  <% end %>
