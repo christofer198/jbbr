@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   before_action :authorized
   before_action :session_user
+  before_action :flip_view
 
   def logged_in?
     !!session[:user_id]
@@ -26,6 +27,13 @@ class ApplicationController < ActionController::Base
 
   def user_matches
     @applications = Application.where(employer_likes: true, user_like: true, applicant_id: session_user.id)
+  end
+
+  def flip_view
+    if params[:session_flipper]
+      session[:type] = session[:type].to_i * params[:session_flipper].to_i
+      params[:session_flipper] = nil
+    end
   end
 
 end

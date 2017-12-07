@@ -17,6 +17,7 @@ class UsersController < ApplicationController
     if @user.valid?
       @user.save
       session[:user_id] = @user.id
+      session[:type] = 1 # 1:applicant, -1: company
       redirect_to profile_path
     else
       render :new
@@ -37,11 +38,13 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     applications = Application.where(applicant_id: @user.id, employer_likes: true, user_like: true)
     @matches = applications.map{|x| Opening.find(x.opening_id)}
-    #byebug
   end
 
   def add_resume
     @resume = Resume.new
+  end
+
+  def matches
   end
 
   private

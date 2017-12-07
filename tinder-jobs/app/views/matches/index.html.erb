@@ -1,0 +1,10 @@
+<h1>Your Matches</h1>
+<% if session[:type] == 'user'%>
+  <% user_matches.each do |match| %>
+    <%= match.title %>
+  <% end %>
+<% else %>
+  <% company_matches.each do |match| %>
+    <%= match.title %>
+  <% end %>
+<% end %>

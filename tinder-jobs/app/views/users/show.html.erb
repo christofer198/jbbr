@@ -2,12 +2,6 @@
 
 <h1> Hi, <%= @user.name %> </h1>
 
-<% if @user.company_id == nil %>
-  <%= link_to "Become an Employer", new_company_path %>
-<% else %>
-  <%= link_to "Your #{Company.find(@user.company_id).name} Employee Page", company_path(@user.company_id) %>
-<% end %>
-
 <h2> Preferences </h2>
 
 <%= form_for :user do |f| %>
@@ -30,13 +24,3 @@
 <% end %>
 
 <%= link_to "See all openings", openings_path %>
-
-
-<h1>Your Matches</h1>
-<% if @matches.nil? == false %>
-<% @matches.each do |match| %>
-
-<p><%= match.title %></p>
-
-<% end %>
-<% end %>

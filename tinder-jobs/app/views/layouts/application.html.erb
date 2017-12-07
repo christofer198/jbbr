@@ -10,25 +10,48 @@
 
   <body>
 
-    <% flash.each do |key, value| %>
-      <em><%= value %></em>
-    <% end %>
 
     <% if session[:user_id] %>
-      <p>Logged in as <%= User.find(session[:user_id]).name %></p>
-      <p><a href="/profile"> <%= button_tag "Home" %> </a></p>
-      <p><a href="/logout"> <%= button_tag "Logout" %> </a></p>
+      <p>Logged in as <%= User.find(session[:user_id]).name %>
+        <a href="/profile"> <%= button_tag "Preferences" %>
+        <a href="/logout"> <%= button_tag "Logout" %> </a></p>
       <% @user = User.find(session[:user_id]) %>
-        <% if !User.find(session[:user_id]).company_id.nil? %>
-          <p>Company Openings Listed: <%= Company.find(@user.company_id).openings.count %> (link to company page?) </p>
-          LINK TO COMPANY MATCHES (X) HERE
-        <% end %>
-        <p>Applications Swiped: <%= @user.applications.count %> </p>
-        <p> LINK TO USER MATCHES (X) HERE </p>
+
+
+    <h1>Session type: <%= session[:type] == 1 ? 'Applicant' : 'Company' %></h1>
+
+    <% if session[:type] == -1 %>
+      <p>View / Create Openings: <%= Company.find(@user.company_id).openings.count %> </p>
+      <%= link_to 'Match with Applicants', '/' %>
+      <%= link_to 'COMPANY MATCHES (X)', matches_path  %>
+
+      <% if @user.company_id == nil %>
+        <%= link_to "Become an Employer", new_company_path %>
+      <% else %>
+        <%= link_to "Your #{Company.find(@user.company_id).name} Employee Page", company_path(@user.company_id) %>
+      <% end %>
+
+      <%= form_tag request.original_url, method: :get do %>
+        <%= hidden_field_tag 'session_flipper', -1 %>
+        <%= submit_tag 'Switch to Employee View' %>
+      <% end %>
+
+    <% else %>
+      <p>Applications Swiped: <%= @user.applications.count %> </p>
+      <p> USER MATCHES (X) </p>
+
+      <%= form_tag request.original_url, method: :get do %>
+        <%= hidden_field_tag 'session_flipper', -1 %>
+        <%= submit_tag 'Switch to Company View' %>
+      <% end %>
+
     <% end %>
 
+    <% flash.each do |key, value| %>
+    <em><%= value %></em>
+    <% end %>
 
-
+  <% end %>
     <%= yield %>
 
 

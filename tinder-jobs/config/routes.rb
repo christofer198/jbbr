@@ -28,4 +28,6 @@ Rails.application.routes.draw do
 
   get '/profile/resume', to: 'resumes#show', as: 'resume_show'
 
+  get '/matches', to: 'users#matches'
+
 end
