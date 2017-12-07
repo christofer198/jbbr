@@ -1,10 +1,7 @@
 class UsersController < ApplicationController
 
   skip_before_action :authorized, only: [:new, :create]
-<<<<<<< HEAD
   skip_before_action :session_user, only: [:new, :create]
-=======
->>>>>>> refs/remotes/origin/master
 
   def index
     @users = User.all
@@ -15,12 +12,7 @@ class UsersController < ApplicationController
   end
 
   def create
-<<<<<<< HEAD
     @user = User.new(user_params(:name, :email, :password, :password_confirmation))
-=======
-    byebug
-    @user = User.new(user_params)
->>>>>>> refs/remotes/origin/master
     if @user.valid?
       @user.save
       session[:user_id] = @user.id

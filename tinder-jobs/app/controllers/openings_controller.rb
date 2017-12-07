@@ -1,7 +1,5 @@
 class OpeningsController < ApplicationController
 
-
-
   def new
     @opening = Opening.new
   end
@@ -50,10 +48,16 @@ class OpeningsController < ApplicationController
 
   def index
     if !params[:sector].nil? && !params[:sector][:sector_id].empty?
-      @openings = Sector.find(params[:sector][:sector_id]).openings
+      openings = Sector.find(params[:sector][:sector_id]).openings
     else
-      @openings = Opening.all
+      openings = Opening.all
     end
+    #byebug
+    @openings = openings.reject{|x| Application.where(opening_id: x, applicant_id: session[:user_id]).blank? == false}
+    # @openings = []
+    # openings.each{|x| @openings << Application.where(opening_id: x, applicant_id: session[:user_id]).reject{|x| x.blank?}}
+    # @openings.reject!{|x| x.blank?}
+
   end
 
   def opening_params
