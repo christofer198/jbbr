@@ -18,6 +18,7 @@ Distance: <%= text_field_tag :distance %> from <%= @user.zip_code %>
   <%= form_tag('/applications', method: :post) do %>
     <%= hidden_field_tag 'opening_id', opening.id %>
     <%= submit_tag 'Apply' %>
+    <%= submit_tag 'Reject' %>
   <% end %>
 <% end %>
 
