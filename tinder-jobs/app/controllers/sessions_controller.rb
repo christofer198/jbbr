@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
 
   skip_before_action :authorized, only: [:new, :create]
+  skip_before_action :session_user
 
   def new
   end
@@ -18,7 +19,7 @@ class SessionsController < ApplicationController
 
   def destroy
     session[:user_id] = nil
-    redirect_to login_path # need to create a signin page
+    redirect_to login_path
   end
 
 end
