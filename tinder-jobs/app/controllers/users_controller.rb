@@ -34,6 +34,7 @@ class UsersController < ApplicationController
     @user = User.find(session[:user_id])
     applications = Application.where(applicant_id: @user.id, employer_likes: true, user_like: true)
     @matches = applications.map{|x| Opening.find(x.opening_id)}
+    redirect_to openings_path
   end
 
   def add_resume
