@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171206215454) do
+ActiveRecord::Schema.define(version: 20171207052428) do
 
   create_table "applications", force: :cascade do |t|
     t.integer "applicant_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 20171206215454) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "employer_likes"
+    t.boolean "user_like"
   end
 
   create_table "companies", force: :cascade do |t|

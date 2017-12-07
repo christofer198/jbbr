@@ -23,8 +23,8 @@ class CompaniesController < ApplicationController
     else
       redirect_to profile_path
     end
-    #@users = @openings.map{|x| x.applications.where(company_likes: true).ids}.flatten.map{|x| Application.find(x).user}
-    #byebug
+    @users = @openings.map{|x| x.applications.where(employer_likes: true).ids}.flatten.map{|x| User.find(Application.find(x).applicant_id)}
+    byebug
   end
 
   private
