@@ -16,14 +16,27 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <style>
      body {
-         font: 20px Montserrat, sans-serif;
+         font: 20px 'Montserrat', sans-serif;
          line-height: 1.8;
          color: #f5f6f7;
      }
-     p {font-size: 16px;}
+     p {
+       font-size: 16px;
+       color: #000;
+     }
+     h1 {
+       color: #000;
+     }
+     h2 {
+       color: #000;
+     }
+
+     h3 {
+       color: #000;
+     }
      .margin {margin-bottom: 45px;}
         .bg-1 {
-            background-color: #2c3e50;
+          background-color: #2c3e50;
            color: #ecf0f1;
            min-height: 90vh;
        }
@@ -49,8 +62,8 @@
          border: 0;
          border-radius: 0;
          margin-bottom: 0;
-         font-size: 12px;
-         letter-spacing: 5px;
+         font-size: 15px;
+         letter-spacing: 4px;
      }
      .navbar-nav  li a:hover {
          color: #1abc9c !important;
@@ -78,6 +91,52 @@
             <li><a href="#">Viewing As: <%= session[:type] == 1 ? 'Applicant' : 'Company' %></a></li>
             <li><a href="/profile">Profile</a></li>
             <li><a href="/logout">Logout</a></li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Find A Match</a>
+              <div class="dropdown-menu">
+                <% if session[:type] == -1 %>
+                    <% if Company.find(@user.company_id).openings.any? %>
+                      <p> <a href='/companies/<%=@user.company_id%>'>Openings: <%= Company.find(@user.company_id).openings.count %> </a>
+                      <p> <a href='/openings/new'> Add more openings</a><br>
+                      <p> <a href='/matches'> Matches: <%= @user.company_matches.count %> </a></p>
+                      <%= link_to 'Match with Applicants', applications_path %>
+                    <% else %>
+                      <% if Company.find(@user.company_id).openings.count > 0 %>
+                        <p> Openings: <%= Company.find(@user.company_id).openings.count %> </p>
+                      <% else %>
+                        <%= link_to "Create An Opening", new_opening_path %>
+                      <% end %>
+
+                    <% end %>
+
+                  <%= form_tag request.original_url, method: :get do %>
+                    <%= hidden_field_tag 'session_flipper', -1 %>
+                    <%= submit_tag('Switch to Employee View', class: "btn btn-primary") %>
+                  <% end %>
+                <% else %>
+                  <%= link_to 'Match with Companies', openings_path %>
+                  <p> <a href='/matches'> Matches: <%= @user.user_matches.count %> </a></p>
+
+                  <% if @user.company_id == nil %>
+                    <%= link_to "Become an Employer", new_company_path %>
+                  <% else %>
+
+                  <%= form_tag request.original_url, method: :get do %>
+                    <%= hidden_field_tag 'session_flipper', -1 %>
+                    <%= submit_tag('Switch to Company View', class: "btn btn-primary") %>
+                  <% end %>
+
+                  <% end %>
+
+                <% end %>
+
+              </div>
+            </li>
+
+
+
+            <!-- Dropdown -->
+
           </ul>
         </div>
       </div>
@@ -85,70 +144,10 @@
 
 <% end %>
 
-    <% if session[:user_id] %>
 
-
-    <% if session[:type] == -1 %>
-      <% if @user.company_id == nil %>
-        <%= link_to "Become an Employer", new_company_path %>
-      <% else %>
-        <p>View / Create Openings: <%= Company.find(@user.company_id).openings.count %> </p>
-        <%= link_to 'Match with Applicants', '/' %>
-        <%= link_to 'COMPANY MATCHES (X)', matches_path  %>
-        <%= link_to "Your #{Company.find(@user.company_id).name} Employee Page", company_path(@user.company_id) %>
-      <% end %>
-
-        <% if Company.find(@user.company_id).openings.any? %>
-          <p> <a href='/companies/<%=@user.company_id%>'>Openings: <%= Company.find(@user.company_id).openings.count %> </a>
-          <p> <a href='/openings/new'> Add more openings</a><br>
-          <p> <a href='/matches'> Matches: <%= @user.company_matches.count %> </a></p>
-          <%= link_to 'Match with Applicants', applications_path %>
-        <% else %>
-          <% if Company.find(@user.company_id).openings.count > 0 %>
-            <p> Openings: <%= Company.find(@user.company_id).openings.count %> </p>
-          <% else %>
-            <%= link_to "Create An Opening", new_opening_path %>
-          <% end %>
-
-        <% end %>
-
-      <%= form_tag request.original_url, method: :get do %>
-        <%= hidden_field_tag 'session_flipper', -1 %>
-        <%= submit_tag 'Switch to Employee View' %>
-      <% end %>
-
-    <% else %>
-      <p>Applications Swiped: <%= @user.applications.count %> </p>
-      <%= link_to 'Match with Companies', openings_path %>
-      <p> <a href='/matches'> Matches: <%= @user.user_matches.count %> </a></p>
-
-      <% if @user.company_id == nil %>
-        <%= link_to "Become an Employer", new_company_path %>
-      <% else %>
-
-      <%= form_tag request.original_url, method: :get do %>
-        <%= hidden_field_tag 'session_flipper', -1 %>
-        <%= submit_tag 'Switch to Company View' %>
-      <% end %>
-
-      <% end %>
-
-    <% end %>
-
-    <% flash.each do |key, value| %>
-    <em><%= value %></em>
-    <% end %>
-
-  <% end %>
-    <%= yield %>
-
-
-    <div class="container-fluid text-center bg-1 col-md-12 ">
-    <div class="row col-md-6 col-md-push-3" style="background: #ecf0f1; border-radius: 5px">
-
-
-    </div>
-    </div>
+<div class="container-fluid text-center bg-1 col-md-12" style="height: 100vh">
+  <%= yield %>
+</div>
 
   </body>
 </html>

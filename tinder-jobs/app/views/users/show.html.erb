@@ -1,28 +1,46 @@
 <% if session[:type] == 1 %>
-  <h1> Applicant Profile </h1>
 
-  <h2> Applicant Preferences </h2>
+    <div class="row col-md-4 col-md-push-1" style="border-radius: 5px; background-color: #ecf0f1;">
 
-  <%= form_for :user do |f| %>
+      <h1> Your Profile </h1>
+      <%= form_for :user do |f| %>
 
-    <p>Name: <%= f.text_field :name %> </p>
-    <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
-    <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
-    <p>Zip: <%= f.text_field :zip_code %></p>
-    <%= f.submit 'Save Preferences' %>
+        <p>Name: <%= f.text_field :name %> </p>
+        <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
+        <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
+        <p>Zip: <%= f.text_field :zip_code %></p>
+        <%= f.submit('Save Preferences', class: "btn btn-primary") %>
 
-  <% end %>
+      <% end %>
 
-  <% if @user.resume %>
-    <h2> Here's your resume </h2>
-    <p><h3><%= @user.resume.title %></h3>
-    <p><%= @user.resume.description %>
-    <p><a href='<%= resume_edit_path %>'> <%= button_tag "Edit your resume" %> </a></p>
-  <% else %>
-    <p><a href='<%= resume_new_path %>'> <%= button_tag "Add your resume" %></a></p>
-  <% end %>
+    </div>
+
+    <div class="row col-md-4 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
+
+
+      <h1> Edit Resume</h1>
+
+
+        <%= form_for :resume do |f|%>
+        <p>
+        <label> Title: </label><br>
+        <%= f.text_field :title %>
+      </p>
+        <p>
+
+        <label>Paste Resume Here:</label><br>
+        <%= f.text_area :description %>
+
+        <p>
+
+        <%= f.submit("Edit", class: 'btn btn-primary') %>
+
+      <% end %>
+
+    </div>
 
 <% else %>
+<div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
 
   <% if Company.find(@user.company_id) %>
     <% @company = Company.find(@user.company_id) %>
@@ -37,5 +55,7 @@
         <br>
       <% end %>
   <% end %>
+
+</div>
 
 <% end %>
