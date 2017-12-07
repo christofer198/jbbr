@@ -8,3 +8,7 @@ Salary: <%= f.text_field :salary, value: @opening.salary %>
 
 
 <% end %>
+
+<%= form_tag(opening_path(@opening), method: :delete) do%>
+  <%= submit_tag "Delete" %>
+<% end %>

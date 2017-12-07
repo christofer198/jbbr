@@ -1,8 +1,0 @@
-<%= form_for @employer do |f| %>
-
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.collection_select :sector_id, Sector.all, :id, :name %>
-  <%= f.submit 'Create Company' %>
-
-<% end %>
