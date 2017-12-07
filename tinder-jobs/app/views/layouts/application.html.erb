@@ -18,7 +18,17 @@
       <p>Logged in as <%= User.find(session[:user_id]).name %></p>
       <p><a href="/profile"> <%= button_tag "Home" %> </a></p>
       <p><a href="/logout"> <%= button_tag "Logout" %> </a></p>
+      <% @user = User.find(session[:user_id]) %>
+        <% if !User.find(session[:user_id]).company_id.nil? %>
+          <p>Company Openings Listed: <%= Company.find(@user.company_id).openings.count %> (link to company page?) </p>
+          LINK TO COMPANY MATCHES (X) HERE
+        <% end %>
+        <p>Applications Swiped: <%= @user.applications.count %> </p>
+        <p> LINK TO USER MATCHES (X) HERE </p>
     <% end %>
+
+
+
     <%= yield %>
 
 

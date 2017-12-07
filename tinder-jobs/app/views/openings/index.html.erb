@@ -1,19 +1,19 @@
-<h1> All the Openings </h1>
+<h1> Available Openings </h1>
+
+<% if !@user.resume.nil? %>
 
 <h2> Filters </h2>
+
 <%= form_tag openings_path, method: :get do %>
-Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name, {:prompt => "All"} %>
-Distance: <%= text_field_tag :distance %> from <%= @user.zip_code %>
-<%= submit_tag('Filter') %>
+  Industry: <%= collection_select :sector, :sector_id, Sector.all, :id, :name, {:prompt => "All"} %>
+  Distance: <%= text_field_tag :distance %> from <%= @user.zip_code %>
+  <%= submit_tag('Filter') %>
 <% end %>
-
-
-<ol>
 
 <% opening = @openings.sample %>
 
 <% if !opening.nil? %>
-  <li> <h4><%= opening.title %> </h4></li>
+  <h4><%= opening.title %> </h4>
   <%= opening.description %>
   <%= form_tag('/applications', method: :post) do %>
     <%= hidden_field_tag 'opening_id', opening.id %>
@@ -21,5 +21,8 @@ Distance: <%= text_field_tag :distance %> from <%= @user.zip_code %>
   <% end %>
 <% end %>
 
+<% else %>
 
-</ol>
+<h1><%= link_to 'Please add your resume to see openings', resume_new_path %></h1>
+
+<% end %>

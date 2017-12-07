@@ -5,7 +5,7 @@
 <% if @user.company_id == nil %>
   <%= link_to "Become an Employer", new_company_path %>
 <% else %>
-  <%= link_to "Your Company's Page", company_path(@user.company_id) %>
+  <%= link_to "Your #{Company.find(@user.company_id).name} Employee Page", company_path(@user.company_id) %>
 <% end %>
 
 <h2> Preferences </h2>
