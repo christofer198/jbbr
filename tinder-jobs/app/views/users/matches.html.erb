@@ -1,16 +1,24 @@
-<h1>Your Matches</h1>
+
 <% if session[:type] == 1 %>
-  <% @user.user_matches.each do |match| %>
-  <%= match.opening.title %>
+<div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
+  <h1>Your Matches</h1>
   <br>
-  <%= match.opening.description %>
-  <br>
-  <%= match.opening.salary %>
-  <br>
-  <%= match.opening.zip_code %>
-  <br>
-  <%= match.opening.company.name%>
+  <% if @user.user_matches.empty? %>
+    <p>You have no matches</p>
+  <% else %>
+    <% @user.user_matches.each do |match| %>
+      <h2>Hooray <%= match.opening.company.name%> likes you!</h2>
+      <h2><%= match.opening.title %></h2>
+      <h2><%= match.opening.description %></h2>
+      <br>
+      <p>Salary: <%= match.opening.salary %></p>
+      <br>
+      <p>Location: <%= match.opening.zip_code %></p>
+      <br>
+
+    <% end %>
   <% end %>
+</div>
 <% else %>
   <% @user.company_matches.each do |match| %>
     <%= match.opening.title %>
