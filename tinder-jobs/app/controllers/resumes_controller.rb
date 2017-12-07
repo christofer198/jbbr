@@ -24,15 +24,7 @@ class ResumesController < ApplicationController
     @resume.update(resume_params)
     redirect_to profile_path
   end
-
-  def show
-    @resume = User.find(session[:user_id]).resume
-  end
-
-  def index
-    @resumes = Resume.all
-  end
-
+  
   def resume_params
     params.require(:resume).permit(:title, :description, :applicant_id)
   end

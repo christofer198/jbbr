@@ -1,5 +1,7 @@
 class WelcomeController < ApplicationController
-  def index
+  skip_before_action :authorized, :session_user
 
+  def index
+    render :layout => false
   end
 end

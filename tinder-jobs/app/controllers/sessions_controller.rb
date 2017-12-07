@@ -4,6 +4,7 @@ class SessionsController < ApplicationController
   skip_before_action :session_user
 
   def new
+    render layout: false
   end
 
   def create
