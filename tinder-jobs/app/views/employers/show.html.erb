@@ -1,9 +1,0 @@
-<%= @employer.name %>
-
-<br>
-<h1>Your Openings</h1>
-<% @openings.each do |opening| %>
-  <%= link_to opening.title, opening_path(opening)  %>
-  <br>
-  <p>Review Applications</p>
-<% end %>
