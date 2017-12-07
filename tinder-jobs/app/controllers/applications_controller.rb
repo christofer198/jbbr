@@ -9,8 +9,8 @@ class ApplicationsController < ApplicationController
   def index
     user = User.find(session[:user_id])
     openings = Opening.where(company_id: user.company_id)
-    opening = openings.sample
-    applications = opening.applications.where(opening_id: opening.id, user_like: true, employer_likes: nil)
+    @opening = openings.sample
+    applications = @opening.applications.where(opening_id: @opening.id, user_like: true, employer_likes: nil)
     @application = applications.sample
     if @application.nil? == false
       @applicant = User.find(@application.applicant_id).resume
@@ -18,10 +18,11 @@ class ApplicationsController < ApplicationController
   end
 
   def update
+    #byebug
     @application = Application.find(params[:id])
     @opening = @application.opening
     @application.update(employer_likes: params[:like])
-    redirect_to application_path(@application.opening_id)
+    redirect_to applications_path
   end
 
   def create
