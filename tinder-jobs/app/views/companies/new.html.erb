@@ -1,16 +1,21 @@
+<div class="container-fluid text-center bg-1" style="margin-top: 4%; padding-top: 20vh">
+  <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1; align-content: center;">
+  <h3>Add A New Company </h3>
+  <center>
+  <%= form_for @company do |f| %>
 
-<h3>Add A New Company </h3>
-<%= form_for @company do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name,  class: "form-control", style: "width:70%;", placeholder: "Company Name" %>
+  <%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"}, class: "form-control" %>
+  <%= f.submit 'Create Company', class: "btn btn-primary"%>
+  <% end %>
+  <h3>Join Existing Company</h3>
+    <%= form_for(@user, url: profile_path) do |f| %>
+    <%= f.label :name %>
+    <%= f.collection_select :company_id, Company.all, :id, :name, {prompt: "Company"}, class: "form-control"%>
+    <%= f.submit 'Join Company', class: "btn btn-primary"%>
+    <% end %>
 
-<%= f.label :name %>
-<%= f.text_field :name %>
-<%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"} %>
-
-<h3>Join Existing Company</h3>
-
-<%= f.label :name %>
-<%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
-
-<p><%= f.submit 'Join Company' %>
-
-<% end %>
+</center>
+</div>
+</div>

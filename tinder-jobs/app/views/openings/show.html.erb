@@ -1,14 +1,20 @@
+<div class="container-fluid text-center bg-1 col-md-12" style="margin-top: 4%; padding-top: 20vh">
+  <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1; padding-bottom: 1%;">
+
+
 <%= form_for(@opening) do |f| %>
 
-Title: <%= f.text_field :name, value: @opening.title %>
-Description: <%= f.text_area :description, value: @opening.description %>
-Salary: <%= f.text_field :salary, value: @opening.salary %>
+<h1>Title: </h1>
+<%= f.text_field :name, value: @opening.title, class: 'form-control' %>
+<p>Description: <%= f.text_area :description, value: @opening.description, class: 'form-control' %></p>
+<p>Salary: <%= f.text_field :salary, value: @opening.salary, class: 'form-control' %></p>
 
-<%= f.submit "Edit" %>
-
-
+<%= f.submit "Edit", class: "btn btn-primary pull-right" %>
 <% end %>
 
 <%= form_tag(opening_path(@opening), method: :delete) do%>
-  <%= submit_tag "Delete" %>
+  <%= submit_tag("Delete", class: "btn btn-primary pull-left") %>
 <% end %>
+
+</div>
+</div>

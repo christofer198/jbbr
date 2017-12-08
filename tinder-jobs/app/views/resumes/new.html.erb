@@ -1,5 +1,5 @@
-<h1> New </h1>
-
+<div class="container-fluid text-center bg-1" style="margin-top: 5%; padding-top: 20vh">
+  <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1; padding-bottom: 1%;">
 <% if @resume.errors %>
 
   <% @resume.errors.full_messages.each do |message| %>
@@ -10,9 +10,14 @@
 
 <%= form_for :resume do |f| %>
 
-  Title: <%= f.text_field :title %><p>
-  Paste Resume Here: <%= f.text_area :description %><p>
+  <h2>Title: </h2>
+  <%= f.text_field :title, class: 'form-control' %>
+  <h2>Paste Resume Here: </h2>
+  <%= f.text_area :description, class: 'form-control' %><p>
   <%= f.hidden_field :applicant_id, value: @applicant_id %>
-  <%= f.submit %>
+  <br>
+  <%= f.submit("Save Resume", class: 'btn btn-primary') %>
 
 <% end %>
+</div>
+</div>

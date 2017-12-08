@@ -1,10 +1,20 @@
-<%= form_for(@opening) do |f| %>
+<div class="container-fluid text-center bg-1" style="margin-top: 4%; padding-top: 20vh">
+  <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1; padding-bottom: 1%;">
 
-Job Title: <%= f.text_field :title %>
-Job Description: <%= f.text_area :description %>
-Job Salary: <%= f.text_field :salary %>
-Job Location (Zip Code): <%= f.text_field :zip_code %>
-<%= f.submit "Create Opening" %>
+    <%= form_for(@opening) do |f| %>
+
+    <h2><%= f.label :title %></h2>
+    <%= f.text_field :title, class: 'form-control' %>
+    <p><%= f.label :description %></p>
+    <%= f.text_area :description, class: 'form-control' %>
+    <p><%= f.label :salary %></p>
+    <%= f.text_field :salary, class: 'form-control' %>
+    <p><%= f.label :zip_code %></p>
+    <%= f.text_field :zip_code, class: 'form-control' %></h1>
+    <br>
+    <%= f.submit("Create Opening", class: "btn btn-primary") %>
 
 
 <% end %>
+</div>
+</div>

@@ -1,20 +1,28 @@
 
+<div class="container-fluid text-center bg-1" style="margin-top: 5%; padding-top: 20vh">
 <% if !@user.resume.nil? %>
 
 <% opening = @openings.sample %>
 
-<div class="container-fluid text-center bg-1" style="margin-top: 5%; padding-top: 20vh">
+
 <% if !opening.nil? %>
-<div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
+<div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1; padding-bottom: 1%;">
   <h1><%= opening.title %> </h1>
   <h3>Description:</h3>
   <p><%= opening.description %></p>
+  <h3>Salary</h3>
+  <p><%= opening.salary %>
+  <% if !opening.zip_code.nil? && !@user.pref_distance.nil? %>
+    <h3>Location</h3>
+    <p><%= @zip_hash[opening.zip_code] %> miles from you</p>
+  <% end %>
   <%= form_tag('/applications', method: :post) do %>
     <%= hidden_field_tag 'opening_id', opening.id %>
     <%= submit_tag('Reject', class: 'btn btn-primary pull-left') %>
     <%= submit_tag('Apply', class: 'btn btn-primary pull-right')%>
   <% end %>
 </div>
+
 <% else %>
 <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
   <h1>No new profiles</h1>

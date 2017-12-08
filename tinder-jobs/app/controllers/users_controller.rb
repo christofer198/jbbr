@@ -8,8 +8,9 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(user_params(:name, :email, :password, :password_confirmation, company: nil))
+    @user = User.new(user_params(:name, :email, :password, :password_confirmation, :zip_code, company: nil))
     if @user.valid?
+      @user.image = "default.png"
       @user.save
       session[:user_id] = @user.id
       session[:type] = 1 # 1:applicant, -1: company
@@ -25,9 +26,8 @@ class UsersController < ApplicationController
 
   def edit
     if params[:user]
-      @user.update(user_params(:name, :email, :password, :password_confirmation, :pref_sector_id, :pref_distance, :zip_code))
+      @user.update(user_params(:name, :email, :password, :password_confirmation, :pref_sector_id, :pref_distance, :zip_code, :company_id))
     end
-    
     flash[:message] = "Preferences Updated"
     redirect_to profile_path
   end
