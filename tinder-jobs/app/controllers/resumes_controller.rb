@@ -20,7 +20,8 @@ class ResumesController < ApplicationController
   end
 
   def update # not useful anymore??????? see users#edit
-    @resume = Resume.find_or_create_by(resume_params)
+    #byebug
+    @resume = Resume.find_or_create_by(applicant_id: @user.id)
     @resume.update(resume_params)
     redirect_to profile_path
   end

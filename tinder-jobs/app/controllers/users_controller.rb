@@ -27,11 +27,7 @@ class UsersController < ApplicationController
     if params[:user]
       @user.update(user_params(:name, :email, :password, :password_confirmation, :pref_sector_id, :pref_distance, :zip_code))
     end
-    if @user.resume
-      @user.resume.update(resume_params)
-    else
-      @user.resume = Resume.create(resume_params)
-    end
+    
     flash[:message] = "Preferences Updated"
     redirect_to profile_path
   end
@@ -52,9 +48,6 @@ class UsersController < ApplicationController
     params.require(:user).permit(args)
   end
 
-  def resume_params
-    params.require(:resume).permit(:title, :description)
-  end
 
   #:name, :email, :password, :password_confirmation, :pref_sector_id, :pref_distance, :zip_code
 

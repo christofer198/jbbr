@@ -30,10 +30,11 @@
 
       <h1> Resume</h1>
 
-        <%= form_for :resume do |f| %>
+        <%= form_for :resume, url: "/profile/resume/edit" do |f| %>
           <p>
           <label> Title: </label><br>
           <%= f.text_field :title  %>
+          <%= f.hidden_field :applicant_id, value: @user.id %>
           </p>
           <p>
           <label>Paste Resume Here:</label><br>
@@ -47,28 +48,30 @@
   </div>
 
 <% else %>
-<div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
+<div class="container-fluid text-center bg-1 col-md-12" style="margin-top: 4%; padding-top: 20vh">
+  <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
 
-  <% if Company.find(@user.company_id) %>
-    <% @company = Company.find(@user.company_id) %>
-    <%= form_for @company do |f| %>
+    <% if Company.find(@user.company_id) %>
+      <% @company = Company.find(@user.company_id) %>
+      <%= form_for @company do |f| %>
 
-      <h3> Add New Company <h3>
+        <h3> Add New Company <h3>
 
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-      <%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"} %>
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+        <%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"} %>
 
-      <h3>Join Existing Company</h3>
+        <h3>Join Existing Company</h3>
 
-      <%= f.label :name %>
-      <%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
+        <%= f.label :name %>
+        <%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
 
-      <p><%= f.submit 'Edit Company' %>
+        <p><%= f.submit 'Edit Company' %>
 
+      <% end %>
     <% end %>
-  <% end %>
 
+  </div>
 </div>
 
 <% end %>
