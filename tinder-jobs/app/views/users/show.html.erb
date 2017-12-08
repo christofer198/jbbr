@@ -18,24 +18,19 @@
     <div class="row col-md-4 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
 
 
-      <h1> Edit Resume</h1>
+      <h1> Resume</h1>
 
-
-        <%= form_for :resume do |f|%>
-        <p>
-        <label> Title: </label><br>
-        <%= f.text_field :title %>
-      </p>
-        <p>
-
-        <label>Paste Resume Here:</label><br>
-        <%= f.text_area :description %>
-
-        <p>
-
-        <%= f.submit("Edit", class: 'btn btn-primary') %>
-
-      <% end %>
+        <%= form_for :resume do |f| %>
+          <p>
+          <label> Title: </label><br>
+          <%= f.text_field :title  %>
+          </p>
+          <p>
+          <label>Paste Resume Here:</label><br>
+          <%= f.text_area :description %>
+          <p>
+          <%= f.submit("Save", class: 'btn btn-primary') %>
+        <% end %>
 
     </div>
 

@@ -19,12 +19,12 @@ class ResumesController < ApplicationController
     @resume = session_user.resume
   end
 
-  def update
-    @resume = session_user.resume
+  def update # not useful anymore??????? see users#edit
+    @resume = Resume.find_or_create_by(resume_params)
     @resume.update(resume_params)
     redirect_to profile_path
   end
-  
+
   def resume_params
     params.require(:resume).permit(:title, :description, :applicant_id)
   end

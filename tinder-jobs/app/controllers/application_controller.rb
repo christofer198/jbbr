@@ -32,8 +32,8 @@ class ApplicationController < ActionController::Base
   def flip_view
     if params[:session_flipper]
       session[:type] = session[:type].to_i * params[:session_flipper].to_i
-      params[:session_flipper] = nil
     end
+    params.delete :session_flipper
   end
 
 end
