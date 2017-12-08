@@ -28,7 +28,7 @@ Rails.application.routes.draw do
   post "/profile/resume/new", to: 'resumes#create'
 
   get '/profile/resume/edit', to: 'resumes#edit', as: 'resume_edit'
-  post "/profile/resume/edit", to: 'resumes#update'
+  post "/profile/resume/edit", to: 'resumes#update', as: 'resume_update'
 
   get '/profile/resume', to: 'resumes#show', as: 'resume_show'
 
