@@ -26,6 +26,11 @@ class CompaniesController < ApplicationController
     @users = @openings.map{|x| x.applications.where(employer_likes: true, user_like: true).ids}.flatten.map{|x| User.find(Application.find(x).applicant_id)}
   end
 
+  def update
+    @company = Company.find(params[:id])
+    @company.update(company_params)
+  end
+
   private
 
   def company_params

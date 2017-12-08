@@ -51,16 +51,22 @@
 
   <% if Company.find(@user.company_id) %>
     <% @company = Company.find(@user.company_id) %>
-      <% if @company.openings.any? %>
-        <h1> <%= @company.name %> Openings </h1>
-        <br>
-        <% @company.openings.each do |opening| %>
-          <br>
-          <%= link_to opening.title, opening_path(opening)  %>
-          <br>
-        <% end %>
-        <br>
-      <% end %>
+    <%= form_for @company do |f| %>
+
+      <h3> Add New Company <h3>
+
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= f.collection_select :sector_id, Sector.all, :id, :name, {prompt: "Industry"} %>
+
+      <h3>Join Existing Company</h3>
+
+      <%= f.label :name %>
+      <%= f.collection_select :id, Company.all, :id, :name, {prompt: "Company"}%>
+
+      <p><%= f.submit 'Edit Company' %>
+
+    <% end %>
   <% end %>
 
 </div>
