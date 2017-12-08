@@ -1,31 +1,37 @@
 <% if session[:type] == 1 %>
+<div class="container-fluid text-center bg-1 col-md-12" style="margin-top: 5%; padding-top: 20vh">
+    <div class="row col-md-2 col-md-push-1" style="border-radius: 5px; background-color: #ecf0f1; padding-left: 0; padding-right: 0;">
+      <div class="card" style="overflow: auto;">
+        <span style="position:absolute; top:25%; left:30%;"><img src="assets/<%= @user.image %>" id="img" width="100px" height="100px" class="d-inline-block align-top" alt=""></span>
 
-    <div class="row col-md-4 col-md-push-1" style="border-radius: 5px; background-color: #ecf0f1;">
+        <img class="card-img-top img-fluid img-responsive" src="http://7wallpapers.net/wp-content/uploads/2_New-York.jpg">
+        <br>
+        <div class="card-block">
+          <h4 class="card-title">Card title</h4>
+          <p class="card-text"></p>
+          <a href="#" class="btn btn-primary">A button</a>
+        </div>
+      </div>
+    </div>
 
+    <div class="row col-md-4 col-md-push-2" style="border-radius: 5px; background-color: #ecf0f1;">
       <h1> Your Profile </h1>
       <%= form_for :user do |f| %>
-
         <p>Name: <%= f.text_field :name %> </p>
         <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
         <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
         <p>Zip: <%= f.text_field :zip_code %></p>
         <%= f.submit('Save Preferences', class: "btn btn-primary") %>
-
       <% end %>
-
     </div>
 
-    <div class="row col-md-4 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
-
-
+    <div class="row col-md-3 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
       <h1> Edit Resume</h1>
-
-
         <%= form_for :resume do |f|%>
         <p>
         <label> Title: </label><br>
         <%= f.text_field :title %>
-      </p>
+        </p>
         <p>
 
         <label>Paste Resume Here:</label><br>
@@ -39,6 +45,49 @@
 
     </div>
 
+  </div>
+
+  <div class="container-fluid text-center bg-2 col-md-12">
+      <div class="row col-md-4 col-md-push-1" style="border-radius: 5px; background-color: #ecf0f1;">
+
+        <h1> Your Profile </h1>
+        <%= form_for :user do |f| %>
+
+          <p>Name: <%= f.text_field :name %> </p>
+          <p>Industry: <%= f.collection_select :pref_sector_id, Sector.all, :id, :name %></p>
+          <p>Max. distance to Job: <%= f.text_field :pref_distance %> miles</p>
+          <p>Zip: <%= f.text_field :zip_code %></p>
+          <%= f.submit('Save Preferences', class: "btn btn-primary") %>
+
+        <% end %>
+
+      </div>
+
+      <div class="row col-md-4 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
+
+
+        <h1> Edit Resume</h1>
+
+
+          <%= form_for :resume do |f|%>
+          <p>
+          <label> Title: </label><br>
+          <%= f.text_field :title %>
+        </p>
+          <p>
+
+          <label>Paste Resume Here:</label><br>
+          <%= f.text_area :description %>
+
+          <p>
+
+          <%= f.submit("Edit", class: 'btn btn-primary') %>
+
+        <% end %>
+
+      </div>
+
+    </div>
 <% else %>
 <div class="row col-md-6 col-md-push-3" style="border-radius: 5px; background-color: #ecf0f1;">
 
